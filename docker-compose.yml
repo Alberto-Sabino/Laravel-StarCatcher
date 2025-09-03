@@ -1,0 +1,41 @@
+networks:
+    mec-network:
+
+volumes:
+    sql_server_mec:
+
+services:
+    nginx:
+        image: nginx:1.21.6-alpine
+        container_name: nginx-mec
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www
+            - .docker/nginx:/etc/nginx/conf.d
+        networks:
+            mec-network:
+
+    laravel:
+        build:
+            context: .
+            dockerfile: .docker/php/Dockerfile
+        container_name: laravel-mec
+        volumes:
+            - ./:/var/www
+            - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            mec-network:
+
+    database:
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        volumes:
+            - sql_server_mec:/var/opt/mssql
+        environment:
+            TZ: "America/Sao_Paulo"
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "mec2025**"
+        ports:
+            - "1433:1433"
+        networks:
+            mec-network:

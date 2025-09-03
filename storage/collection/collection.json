@@ -1,0 +1,269 @@
+{
+    "info": {
+        "name": "Service Order API",
+        "description": "Coleção de endpoints para a API da Oficina Mecânica",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/register",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "register"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"João da Silva\",\n  \"email\": \"joao@example.com\",\n  \"password\": \"senha123\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "auth", "login"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"joao@example.com\",\n  \"password\": \"senha123\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cars",
+            "item": [
+                {
+                    "name": "Create Car",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/cars",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cars"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"plate\": \"ABC-1234\",\n  \"model\": \"Corolla\",\n  \"brand\": \"Toyota\",\n  \"owner_name\": \"João da Silva\",\n  \"owner_phone\": \"(11) 99999-9999\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "List Cars",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/cars",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cars"]
+                        }
+                    }
+                },
+                {
+                    "name": "Enter Workshop",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "{{base_url}}/api/cars/1/enter-workshop",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cars", "1", "enter-workshop"]
+                        }
+                    }
+                },
+                {
+                    "name": "Exit Workshop",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "{{base_url}}/api/cars/1/exit-workshop",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "cars", "1", "exit-workshop"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Parts",
+            "item": [
+                {
+                    "name": "Create Part",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/parts",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "parts"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Filtro de Óleo\",\n  \"brand\": \"Fram\",\n  \"price\": 25.90\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "List Parts",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/parts",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "parts"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Service Orders",
+            "item": [
+                {
+                    "name": "Create Service Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/service-orders",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "service-orders"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"car_id\": 1,\n  \"total_value\": 0,\n  \"payment_method\": \"Dinheiro\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "List Service Orders",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/service-orders",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "service-orders"]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Part to Service Order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/service-orders/1/add-part",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "service-orders", "1", "add-part"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"parts\": [\n    { \"id\": 1, \"quantity\": 2 },\n    { \"id\": 2, \"quantity\": 1 }\n  ]\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Close Service Order",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "{{base_url}}/api/service-orders/1/close",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "service-orders", "1", "close"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Simulations",
+            "item": [
+                {
+                    "name": "Simulate Adding Parts",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/simulate/service-orders/1/add-parts",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "api",
+                                "simulate",
+                                "service-orders",
+                                "1",
+                                "add-parts"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"parts\": [\n    { \"id\": 1, \"quantity\": 2 },\n    { \"id\": 3, \"quantity\": 1 }\n  ]\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Reports",
+            "item": [
+                {
+                    "name": "Generate Quantitative Report",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/api/reports/summary",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "reports", "summary"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
