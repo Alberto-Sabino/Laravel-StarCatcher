@@ -1,66 +1,107 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projeto de Oficina Mecânica
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este é um projeto de uma oficina mecânica desenvolvido em Laravel.
 
-## About Laravel
+## Configuração e Execução
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Para configurar e executar o projeto, siga os passos abaixo:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Clone o repositório do projeto:
 
-## Learning Laravel
+```bash
+git clone https://github.com/Alberto-Sabino/Laravel-StarCatcher.git
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Execute o Docker Compose para subir os containers do projeto:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+docker-compose up -d
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Acesse o container do banco de dados:
 
-## Laravel Sponsors
+```bash
+docker-compose exec database bash
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Dentro do container do banco de dados, crie o banco de dados executando o comando abaixo:
 
-### Premium Partners
+```bash
+/opt/mssql-tools/bin/sqlcmd -S database -U sa -P 'mec2025**' -Q 'CREATE DATABASE mec_database'
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Saia do container do banco de dados:
 
-## Contributing
+Acesse o container do Laravel:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+docker-compose exec laravel bash
+```
 
-## Code of Conduct
+Dentro do container do Laravel, instale as dependências do Composer:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+Execute as migrações do banco de dados para criar as tabelas necessárias:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate
+```
 
-## License
+O projeto deve estar agora configurado e pronto para ser utilizado.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+A collection do Postman com todos os endpoints dessa API pode ser encontrada em [storage/collection/collection.json](storage/collection/collection.json).
+
+Inicialmente não foi criado uma rota para cadastro de usuário.
+Sinta-se à vontade para criar, ou adicione o usuário manualmente pela linha de comando.
+
+### Para adicionar um usuário via linha de comando
+
+Acesse o container do Laravel.
+
+``` bash
+docker-compose exec laravel bash
+```
+
+Acesse o console do tinker:
+
+``` bash
+php artisan tinker
+```
+
+No console do tinker, use o Eloquent ou a DB facade para criar um usuário:
+
+``` bash
+# Eloquent
+User::create(['name' => 'Seu nome', 'email' => 'Seu email', 'password' => 'Sua senha'])
+
+# DB Facade
+DB::table('users')->insert(['name' => 'Seu nome', 'email' => 'seuemail@newm.com', 'password' => 'Sua Senha']) 
+```
+
+Agora você poderá fazer o login passando seu e-mail e senha.
+
+
+## Funcionalidades e detalhes presentes
+
+- Autenticação via login e senha
+- Autorização via Bearer token (um token simples gerado no login e salvo no cache)
+- CRUD de Veículos
+- CRUD de Peças
+- CRUD de Ordens de serviço
+- Relacionamento feito entre Ordem de Serviço, Peças e Veículos é realizado via Eloquent nas Models ServiceOrder, Car e Part.
+- Existe uma tabela order_part, pois o relacionamento entre ordens de serviço e peças é N:N. Porém não é necessário fazer nada com ela manualmente, pois o Eloquent está lidando com esse relacionamento pra nós.
+- Todos os repositories herdam de um BaseRepository
+- Todos os repositories concretos usam eloquent e implementam um RepositoryInterface
+- Todas as Services de operações do CRUD herdam de uma ServiceBase genérica
+Todos os Controllers que validam dados possuem a lógica de validação abstraída em uma Request
+- Cada rota possui um controller dedicado para promover o Single Responsability Principle.
+- Cada service possui somente uma responsabilidade, e o nome da Service é autoexplicativo.
+- Existem duas views usando blade para renderizar os relatórios.
+- Foi criado um RepositoryServiceProvider para fazer o bind automático das classes concretas e classes abstratas (autoloader do laravel)
+- Existe um Middleware que valida o Bearer token enviado nas rotas protegidas. Caso o token exista, o token é salvo na sessão da request e existe uma Trait que pode buscar qual é o usuário logado a partir disso.
+- $😊 = "😂" não funciona!

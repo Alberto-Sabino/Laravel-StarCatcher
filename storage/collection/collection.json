@@ -1,269 +1,696 @@
 {
-    "info": {
-        "name": "Service Order API",
-        "description": "Coleção de endpoints para a API da Oficina Mecânica",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "Auth",
-            "item": [
-                {
-                    "name": "Register",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/auth/register",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "auth", "register"]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"name\": \"João da Silva\",\n  \"email\": \"joao@example.com\",\n  \"password\": \"senha123\"\n}"
-                        }
-                    }
-                },
-                {
-                    "name": "Login",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/auth/login",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "auth", "login"]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"email\": \"joao@example.com\",\n  \"password\": \"senha123\"\n}"
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Cars",
-            "item": [
-                {
-                    "name": "Create Car",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/cars",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "cars"]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"plate\": \"ABC-1234\",\n  \"model\": \"Corolla\",\n  \"brand\": \"Toyota\",\n  \"owner_name\": \"João da Silva\",\n  \"owner_phone\": \"(11) 99999-9999\"\n}"
-                        }
-                    }
-                },
-                {
-                    "name": "List Cars",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "{{base_url}}/api/cars",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "cars"]
-                        }
-                    }
-                },
-                {
-                    "name": "Enter Workshop",
-                    "request": {
-                        "method": "PATCH",
-                        "url": {
-                            "raw": "{{base_url}}/api/cars/1/enter-workshop",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "cars", "1", "enter-workshop"]
-                        }
-                    }
-                },
-                {
-                    "name": "Exit Workshop",
-                    "request": {
-                        "method": "PATCH",
-                        "url": {
-                            "raw": "{{base_url}}/api/cars/1/exit-workshop",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "cars", "1", "exit-workshop"]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Parts",
-            "item": [
-                {
-                    "name": "Create Part",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/parts",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "parts"]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"name\": \"Filtro de Óleo\",\n  \"brand\": \"Fram\",\n  \"price\": 25.90\n}"
-                        }
-                    }
-                },
-                {
-                    "name": "List Parts",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "{{base_url}}/api/parts",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "parts"]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Service Orders",
-            "item": [
-                {
-                    "name": "Create Service Order",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/service-orders",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "service-orders"]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"car_id\": 1,\n  \"total_value\": 0,\n  \"payment_method\": \"Dinheiro\"\n}"
-                        }
-                    }
-                },
-                {
-                    "name": "List Service Orders",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "{{base_url}}/api/service-orders",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "service-orders"]
-                        }
-                    }
-                },
-                {
-                    "name": "Add Part to Service Order",
-                    "request": {
-                        "method": "PATCH",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/service-orders/1/add-part",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "service-orders", "1", "add-part"]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"parts\": [\n    { \"id\": 1, \"quantity\": 2 },\n    { \"id\": 2, \"quantity\": 1 }\n  ]\n}"
-                        }
-                    }
-                },
-                {
-                    "name": "Close Service Order",
-                    "request": {
-                        "method": "PATCH",
-                        "url": {
-                            "raw": "{{base_url}}/api/service-orders/1/close",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "service-orders", "1", "close"]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Simulations",
-            "item": [
-                {
-                    "name": "Simulate Adding Parts",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "url": {
-                            "raw": "{{base_url}}/api/simulate/service-orders/1/add-parts",
-                            "host": ["{{base_url}}"],
-                            "path": [
-                                "api",
-                                "simulate",
-                                "service-orders",
-                                "1",
-                                "add-parts"
-                            ]
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"parts\": [\n    { \"id\": 1, \"quantity\": 2 },\n    { \"id\": 3, \"quantity\": 1 }\n  ]\n}"
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Reports",
-            "item": [
-                {
-                    "name": "Generate Quantitative Report",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "{{base_url}}/api/reports/summary",
-                            "host": ["{{base_url}}"],
-                            "path": ["api", "reports", "summary"]
-                        }
-                    }
-                }
-            ]
-        }
-    ]
+	"info": {
+		"_postman_id": "4e7ac0a7-098a-45ed-8652-1d7a02e9d31e",
+		"name": "Service Order API",
+		"description": "Coleção de endpoints para a API da Oficina Mecânica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44830347",
+		"_collection_link": "https://albertosabino.postman.co/workspace/Alberto-Sabino's-Workspace~4a4c7ea3-627f-4ef8-88b4-01ce2670f862/collection/44830347-4e7ac0a7-098a-45ed-8652-1d7a02e9d31e?action=share&source=collection_link&creator=44830347"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"// Assuming the response contains an accessToken field\r",
+									"const responseJson = pm.response.json();\r",
+									"if (responseJson.accessToken) {\r",
+									"    pm.collectionVariables.set(\"access_token\", responseJson.accessToken);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"alberto.silva@newm.com.br\",\n    \"password\": \"Senha@123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Create Car",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"plate\": \"ABC-1234\",\n    \"model\": \"Corolla\",\n    \"brand\": \"Toyota\",\n    \"year\": \"2020\",\n    \"color\": \"Branco\",\n    \"owner_name\": \"João da Silva\",\n    \"owner_phone\": \"(11) 99999-9999\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/cars",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/cars?page=1&size=15&filters[plate]=ABC-1234&filters[color]=bra",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cars"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "filters[plate]",
+									"value": "ABC-1234"
+								},
+								{
+									"key": "filters[color]",
+									"value": "bra"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Car",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/cars/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enter Workshop",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/cars/:id/enter-workshop",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cars",
+								":id",
+								"enter-workshop"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exit Workshop",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/cars/:id/exit-workshop",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cars",
+								":id",
+								"exit-workshop"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plate\": \"ABC-1234\",\r\n    \"model\": \"Corolla\",\r\n    \"brand\": \"Toyota\",\r\n    \"year\": 2022,\r\n    \"color\": \"Preto\",\r\n    \"owner_name\": \"João da Silva\",\r\n    \"owner_phone\": \"(11) 99999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/cars/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parts",
+			"item": [
+				{
+					"name": "Create Part",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Filtro de Ar\",\n    \"brand\": \"Sabinos\",\n    \"price\": 40.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/parts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"parts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Parts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/parts?page=1&size=15&filters[column]",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"parts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "filters[column]",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Part",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/parts/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"parts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Part",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/parts/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"parts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "10002"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service Orders",
+			"item": [
+				{
+					"name": "Create Service Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"lastServiceOrderId\", response.created.id);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"car_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/service-orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Service Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/service-orders?page=1&size=15&filters[column]",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "filters[column]",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/service-orders/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastServiceOrderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Service Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"payment_method\": \"credit_card\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/service-orders/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastServiceOrderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Part to Service Order",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parts\": [\n        {\n            \"id\": 1,\n            \"quantity\": 1\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/service-orders/:id/attach-part",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders",
+								":id",
+								"attach-part"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastServiceOrderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Service Order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/service-orders/:id/close",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders",
+								":id",
+								"close"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastServiceOrderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Simulate Add Parts",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parts\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/service-orders/:id/simulate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"service-orders",
+								":id",
+								"simulate"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastServiceOrderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Generate Quantitative Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/reports/summary",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reports",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Service Order Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/reports/service-orders/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"reports",
+								"service-orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{lastServiceOrderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "lastServiceOrderId",
+			"value": "",
+			"type": "default"
+		}
+	]
 }
